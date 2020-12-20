@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  flashdetector:
+    build:
+      context: .
+      dockerfile: Dockerfile-swoole
+    restart: always
+    ports:
+      - '8280:8080'

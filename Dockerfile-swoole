@@ -1,0 +1,11 @@
+FROM phpswoole/swoole:php7.4-alpine
+
+COPY * /flashdetector
+WORKDIR /flashdetector/FlashDetector
+RUN composer install
+
+WORKDIR /flashdetector/Scripts
+
+EXPOSE 8080
+
+CMD ["php", "ws.php", "-a", "0.0.0.0", "-p", "8080", "-s"]
