@@ -1,10 +1,14 @@
 FROM phpswoole/swoole:php7.4-alpine
 
-COPY * /flashdetector
-WORKDIR /flashdetector/FlashDetector
-RUN composer install
+COPY . /FlashDetector/
+WORKDIR /FlashDetector/FlashDetector/
+RUN apk add --no-cache git; \
+    composer install
 
-WORKDIR /flashdetector/Scripts
+FROM phpswoole/swoole:php7.4-alpine
+
+COPY --from=0 /FlashDetector /FlashDetector
+WORKDIR /FlashDetector/Scripts/
 
 EXPOSE 8080
 
